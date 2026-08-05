@@ -85,10 +85,10 @@ const questions: Question[] = [
 ];
 
 export default function Home() {
-  const [started, setStarted] = useState(false);
+  const [step, setStep] = useState<"capa" | "quiz" | "slides_finais" | "concluido">("capa");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [finalSlideIndex, setFinalSlideIndex] = useState(0);
 
   const current = questions[currentIndex];
   const isAnswerCorrect = current.answer === "Verdade";
@@ -102,23 +102,34 @@ export default function Home() {
       setCurrentIndex(currentIndex + 1);
       setRevealed(false);
     } else {
-      setCompleted(true);
+      // Terminou as perguntas, entra nos slides finais solicitados
+      setStep("slides_finais");
+      setFinalSlideIndex(0);
+    }
+  };
+
+  const handleNextFinalSlide = () => {
+    // Conteúdo dos 4 slides adicionais enviados no final
+    if (finalSlideIndex < 3) {
+      setFinalSlideIndex(finalSlideIndex + 1);
+    } else {
+      setStep("concluido");
     }
   };
 
   const handleRestart = () => {
-    setStarted(false);
+    setStep("capa");
     setCurrentIndex(0);
     setRevealed(false);
-    setCompleted(false);
+    setFinalSlideIndex(0);
   };
 
-  // Tela Inicial (Capa)
-  if (!started) {
+  // 1. TELA DE CAPA (Totalmente reta)
+  if (step === "capa") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center transform -rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center">
             <div className="mb-6">
               <img
                 src="/__manus__/logo-unifran.png"
@@ -135,7 +146,7 @@ export default function Home() {
               Mitos e Verdades
             </p>
 
-            <div className="bg-gray-50 border-3 border-black p-5 mb-8 transform rotate-1 text-center">
+            <div className="bg-gray-50 border-3 border-black p-5 mb-8 text-center">
               <p className="font-extrabold text-sm text-black mb-2 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
@@ -145,8 +156,8 @@ export default function Home() {
             </div>
 
             <Button
-              onClick={() => setStarted(true)}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer"
+              onClick={() => setStep("quiz")}
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play fill="black" size={24} />
               Iniciar Quiz
@@ -157,38 +168,93 @@ export default function Home() {
     );
   }
 
-  // Tela Final (Reto e organizado sem tortura visual)
-  if (completed) {
+  // 2. SLIDES FINAIS ADICIONAIS (Extraídos dos seus prints)
+  if (step === "slides_finais") {
+    const finalSlidesData = [
+      {
+        titulo: "Importância da Abordagem",
+        conteúdo: "Compreender as transformações da puberdade é essencial para acolher os adolescentes com empatia, reduzir mitos, tabus e orientar adequadamente sobre a saúde física e mental nessa fase de transição."
+      },
+      {
+        titulo: "O Papel do Profissional de Saúde",
+        conteúdo: "Oferecer um ambiente seguro, com escuta qualificada, respeito ao sigilo médico e orientação clara, fortalecendo a autonomia e o autocuidado do adolescente."
+      },
+      {
+        titulo: "Considerações Finais",
+        conteúdo: "A adolescência e a puberdade são processos plurais e individuais. Cada jovem vivencia seu desenvolvimento em seu próprio ritmo, exigindo suporte familiar e institucional adequado."
+      },
+      {
+        titulo: "Referências Bibliográficas",
+        conteúdo: "Ministério da Saúde - Caderneta do Adolescente; Estatuto da Criança e do Adolescente (ECA); Código de Ética Médica; Diretrizes de Saúde do Adolescente - SBP."
+      }
+    ];
+
+    const slideAtual = finalSlidesData[finalSlideIndex];
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 flex items-center justify-center">
+        <div className="max-w-3xl w-full">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-12">
+            <div className="flex justify-between items-center mb-6">
+              <span className="bg-blue-600 text-white font-black px-4 py-1 text-sm border-2 border-black">
+                SLIDE FINAL {finalSlideIndex + 1} de 4
+              </span>
+              <img
+                src="/__manus__/logo-unifran.png"
+                alt="UNIFRAN Logo"
+                className="h-12 object-contain"
+              />
+            </div>
+
+            <h2 className="text-3xl font-black text-black mb-6 uppercase border-b-2 border-black pb-3">
+              {slideAtual.titulo}
+            </h2>
+
+            <p className="text-gray-800 text-xl font-semibold leading-relaxed mb-10 bg-gray-50 border-3 border-black p-6">
+              {slideAtual.conteúdo}
+            </p>
+
+            <Button
+              onClick={handleNextFinalSlide}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+            >
+              {finalSlideIndex === 3 ? "Concluir Apresentação" : "Próximo Slide"}
+              <ChevronRight size={24} />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. TELA DE PARABÉNS / CONCLUSÃO (Totalmente reta)
+  if (step === "concluido") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-12 text-center">
-            <h1 className="text-5xl font-black text-black mb-6 uppercase">
+          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
+            <h1 className="text-6xl font-black text-black mb-6 uppercase">
               Parabéns!
             </h1>
-            <p className="text-3xl font-bold text-gray-800 mb-6">
-              Você completou o quiz! 🎉
+            <p className="text-3xl font-bold text-gray-800 mb-8">
+              Você completou o quiz e os slides! 🎉
             </p>
             <div className="mb-8">
               <img
                 src="/__manus__/logo-unifran.png"
                 alt="UNIFRAN Logo"
-                className="h-28 mx-auto object-contain"
+                className="h-32 mx-auto object-contain"
               />
             </div>
-            
-            <div className="bg-blue-50 border-3 border-black p-6 mb-8 text-center shadow-md">
-              <p className="font-bold text-sm text-gray-900 mb-2 uppercase tracking-wide">
-                MEDICINA UNIFRAN - M16
-              </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
-                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
-              </p>
-            </div>
-
+            <p className="text-sm font-bold text-gray-700 mb-2 uppercase">
+              MEDICINA UNIFRAN - M16
+            </p>
+            <p className="text-xs text-gray-600 mb-8 leading-relaxed">
+              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
+            </p>
             <Button
               onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black cursor-pointer"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black cursor-pointer flex items-center justify-center mx-auto"
             >
               <RotateCcw className="mr-2" />
               Começar de Novo
@@ -199,6 +265,7 @@ export default function Home() {
     );
   }
 
+  // 4. TELA DO QUIZ (Perguntas de 1 a 12 - Totalmente reta)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
@@ -223,10 +290,9 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto">
-        {/* Question Card */}
-        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8 transform -rotate-1">
+        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8">
           <div className="mb-6">
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black transform rotate-2 mb-4">
+            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black mb-4">
               PERGUNTA {currentIndex + 1}
             </span>
           </div>
@@ -238,7 +304,7 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform cursor-pointer"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg cursor-pointer"
               >
                 Revelar Resposta
               </Button>
@@ -246,7 +312,7 @@ export default function Home() {
           ) : (
             <div className="space-y-6">
               {/* Answer Badge */}
-              <div className={`p-6 border-4 border-black transform -rotate-1 ${
+              <div className={`p-6 border-4 border-black ${
                 isAnswerCorrect
                   ? "bg-blue-600 text-white"
                   : "bg-yellow-400 text-black"
@@ -260,7 +326,7 @@ export default function Home() {
               </div>
 
               {/* Explanation */}
-              <div className="bg-gray-100 border-3 border-black p-6 transform rotate-1">
+              <div className="bg-gray-100 border-3 border-black p-6">
                 <h3 className="font-black text-black mb-3 uppercase text-lg">
                   Por quê?
                 </h3>
@@ -274,7 +340,7 @@ export default function Home() {
                 onClick={handleNext}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
-                {currentIndex === questions.length - 1 ? "Finalizar" : "Próxima Pergunta"}
+                {currentIndex === questions.length - 1 ? "Ver Slides Finais" : "Próxima Pergunta"}
                 <ChevronRight size={24} />
               </Button>
             </div>
@@ -283,13 +349,13 @@ export default function Home() {
 
         {/* Tips Footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white border-3 border-black p-4 transform rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-black text-black text-sm uppercase">💡 Dica</p>
             <p className="text-gray-700 font-semibold text-sm mt-2">
               Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
             </p>
           </div>
-          <div className="bg-white border-3 border-black p-4 transform -rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
             <p className="text-gray-700 font-semibold text-xs mt-2 leading-relaxed">
               Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
