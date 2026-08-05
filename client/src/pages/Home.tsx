@@ -132,11 +132,11 @@ export default function Home() {
               />
             </div>
             <p className="text-sm font-bold text-gray-700 mb-2">
-  MEDICINA UNIFRAN - M16
-</p>
-<p className="text-xs text-gray-600 mb-8">
-  Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
-</p>
+              MEDICINA UNIFRAN - M16
+            </p>
+            <p className="text-xs text-gray-600 mb-8">
+              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+            </p>
             <Button
               onClick={handleRestart}
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black"
@@ -241,10 +241,10 @@ export default function Home() {
             </p>
           </div>
           <div className="bg-white border-3 border-black p-4 transform -rotate-1">
-            <p className="font-bold text-black text-base uppercase"> Medicina UNIFRAN - M16</p>
-<p className="text-gray-700 font-semibold text-xs mt-2">
-  Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
-</p>
+            <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
+            <p className="text-gray-700 font-semibold text-xs mt-2">
+              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+            </p>
           </div>
         </div>
       </div>
