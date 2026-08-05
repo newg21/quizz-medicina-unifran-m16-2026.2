@@ -1,5 +1,3 @@
-NOVO ATUALIZADO TESTE
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, RotateCcw, Play } from "lucide-react";
@@ -115,7 +113,6 @@ export default function Home() {
     setCompleted(false);
   };
 
-  // Tela de Apresentação / Início
   if (!started) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
@@ -146,7 +143,7 @@ export default function Home() {
 
             <Button
               onClick={() => setStarted(true)}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-8 text-2xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-8 text-2xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3 cursor-pointer"
             >
               <Play fill="black" size={28} />
               Iniciar Apresentação
@@ -157,7 +154,6 @@ export default function Home() {
     );
   }
 
-  // Tela de Conclusão / Final
   if (completed) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
@@ -189,7 +185,7 @@ export default function Home() {
 
             <Button
               onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-8 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mx-auto gap-2"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-8 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mx-auto gap-2 cursor-pointer"
             >
               <RotateCcw size={22} />
               Voltar ao Início
@@ -200,10 +196,8 @@ export default function Home() {
     );
   }
 
-  // Tela das Perguntas do Quiz
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-8">
-      {/* Header */}
       <div className="max-w-4xl mx-auto mb-6">
         <div className="flex items-center justify-between bg-white border-3 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <img
@@ -225,7 +219,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-4xl mx-auto">
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-10 mb-6 transform -rotate-1">
           <div className="mb-4">
@@ -242,14 +235,13 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:scale-[1.01] transition-transform"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:scale-[1.01] transition-transform cursor-pointer"
               >
                 Revelar Resposta
               </Button>
             </div>
           ) : (
-            <div className="space-y-6 animate-fadeIn">
-              {/* Answer Badge */}
+            <div className="space-y-6">
               <div className={`p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1 ${
                 isAnswerCorrect
                   ? "bg-blue-600 text-white"
@@ -263,7 +255,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Explanation */}
               <div className="bg-gray-50 border-3 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-1">
                 <h3 className="font-black text-black mb-2 uppercase text-base">
                   Explicação Médica:
@@ -273,10 +264,9 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Next Button */}
               <Button
                 onClick={handleNext}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-2 cursor-pointer"
               >
                 {currentIndex === questions.length - 1 ? "Ver Tela Final" : "Próxima Pergunta"}
                 <ChevronRight size={26} />
@@ -285,7 +275,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Footer info inside quiz */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white border-3 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
             <p className="font-black text-black text-xs uppercase">💡 Dica</p>
