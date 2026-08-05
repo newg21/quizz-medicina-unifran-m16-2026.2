@@ -80,7 +80,7 @@ const questions: Question[] = [
     id: 12,
     text: "É normal o suor ficar com cheiro mais forte durante a puberdade.",
     answer: "Verdade",
-    explanation: "As glândulas sudoríparas apócrinas (nas axilas e virilha) 'acordam' na puberdade e produzem um suor especial que, ao entrar em contato com bactérias da pele, geram o odor.",
+    explanation: "As glândulas sudoríparas apócrinas (nas axilas e virilha) 'acordam' na puberdade e produzem um suor especial que, ao entrar em contato com bactérias da pele, gera o odor.",
   },
 ];
 
@@ -88,6 +88,7 @@ export default function Home() {
   const [step, setStep] = useState<"capa" | "quiz" | "concluido">("capa");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [score, setScore] = useState(0);
 
   const current = questions[currentIndex];
   const isAnswerCorrect = current.answer === "Verdade";
@@ -109,6 +110,7 @@ export default function Home() {
     setStep("capa");
     setCurrentIndex(0);
     setRevealed(false);
+    setScore(0);
   };
 
   if (step === "capa") {
@@ -136,7 +138,7 @@ export default function Home() {
               <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed whitespace-nowrap overflow-x-auto px-2">
                 Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
               </p>
             </div>
@@ -175,7 +177,7 @@ export default function Home() {
             <p className="text-sm font-bold text-gray-700 mb-2">
               MEDICINA UNIFRAN - M16
             </p>
-            <p className="text-xs text-gray-600 mb-8">
+            <p className="text-xs text-gray-600 mb-8 whitespace-nowrap overflow-x-auto">
               Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
             </p>
             <Button
@@ -215,10 +217,10 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto">
-        {/* Question Card */}
-        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8 transform -rotate-1">
+        {/* Question Card - Perfectly straight, no rotation */}
+        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8">
           <div className="mb-6">
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black transform rotate-2 mb-4">
+            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black mb-4">
               PERGUNTA {currentIndex + 1}
             </span>
           </div>
@@ -230,15 +232,15 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transition-transform"
               >
                 Revelar Resposta
               </Button>
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Answer Badge */}
-              <div className={`p-6 border-4 border-black transform -rotate-1 ${
+              {/* Answer Badge - Straight, no rotation */}
+              <div className={`p-6 border-4 border-black ${
                 isAnswerCorrect
                   ? "bg-blue-600 text-white"
                   : "bg-yellow-400 text-black"
@@ -251,8 +253,8 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Explanation */}
-              <div className="bg-gray-100 border-3 border-black p-6 transform rotate-1">
+              {/* Explanation - Straight, no rotation */}
+              <div className="bg-gray-100 border-3 border-black p-6">
                 <h3 className="font-black text-black mb-3 uppercase text-lg">
                   Por quê?
                 </h3>
@@ -273,17 +275,17 @@ export default function Home() {
           )}
         </div>
 
-        {/* Tips Footer */}
+        {/* Tips Footer - Straight boxes, names locked without breaking names/surnames */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white border-3 border-black p-4 transform rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-black text-black text-sm uppercase">💡 Dica</p>
             <p className="text-gray-700 font-semibold text-sm mt-2">
               Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
             </p>
           </div>
-          <div className="bg-white border-3 border-black p-4 transform -rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
-            <p className="text-gray-700 font-semibold text-xs mt-2">
+            <p className="text-gray-700 font-semibold text-xs mt-2 whitespace-nowrap overflow-x-auto">
               Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
             </p>
           </div>
