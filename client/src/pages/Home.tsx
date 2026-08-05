@@ -1,6 +1,8 @@
+NOVO ATUALIZADO TESTE
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, RotateCcw } from "lucide-react";
+import { ChevronRight, RotateCcw, Play } from "lucide-react";
 
 interface Question {
   id: number;
@@ -85,9 +87,9 @@ const questions: Question[] = [
 ];
 
 export default function Home() {
+  const [started, setStarted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
 
   const current = questions[currentIndex];
@@ -107,42 +109,47 @@ export default function Home() {
   };
 
   const handleRestart = () => {
+    setStarted(false);
     setCurrentIndex(0);
     setRevealed(false);
-    setScore(0);
     setCompleted(false);
   };
 
-  if (completed) {
+  // Tela de Apresentação / Início
+  if (!started) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
-            <h1 className="text-6xl font-black text-black mb-6 uppercase">
-              Parabéns!
-            </h1>
-            <p className="text-3xl font-bold text-gray-800 mb-8">
-              Você completou o quiz! 🎉
-            </p>
-            <div className="mb-12">
+          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-10 text-center transform -rotate-1">
+            <div className="mb-6">
               <img
                 src="/__manus__/logo-unifran.png"
                 alt="UNIFRAN Logo"
-                className="h-32 mx-auto object-contain"
+                className="h-24 mx-auto object-contain"
               />
             </div>
-            <p className="text-sm font-bold text-gray-700 mb-2">
-              MEDICINA UNIFRAN - M16
+            
+            <h1 className="text-4xl md:text-5xl font-black text-black mb-4 uppercase tracking-tight leading-tight">
+              Puberdade & <br />Adolescência
+            </h1>
+            
+            <p className="text-xl font-bold text-gray-700 mb-8">
+              Mitos e Verdades para o 8º Ano
             </p>
-            <p className="text-xs text-gray-600 mb-8">
-              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
-            </p>
+
+            <div className="bg-gray-100 border-2 border-black p-4 mb-8 transform rotate-1 rounded-none text-left">
+              <p className="font-bold text-sm text-black mb-1">MEDICINA UNIFRAN - M16</p>
+              <p className="text-xs text-gray-700 leading-relaxed">
+                <strong className="text-black">Integrantes:</strong> Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+              </p>
+            </div>
+
             <Button
-              onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black"
+              onClick={() => setStarted(true)}
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-8 text-2xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3"
             >
-              <RotateCcw className="mr-2" />
-              Começar de Novo
+              <Play fill="black" size={28} />
+              Iniciar Apresentação
             </Button>
           </div>
         </div>
@@ -150,19 +157,65 @@ export default function Home() {
     );
   }
 
+  // Tela de Conclusão / Final
+  if (completed) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 md:p-12 text-center transform rotate-1">
+            <h1 className="text-5xl font-black text-black mb-4 uppercase">
+              Parabéns!
+            </h1>
+            <p className="text-2xl font-bold text-gray-800 mb-8">
+              Você completou o quiz interativo! 🎉
+            </p>
+            
+            <div className="mb-8">
+              <img
+                src="/__manus__/logo-unifran.png"
+                alt="UNIFRAN Logo"
+                className="h-28 mx-auto object-contain"
+              />
+            </div>
+
+            <div className="bg-blue-50 border-3 border-black p-6 mb-8 text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <p className="font-black text-blue-900 text-base mb-2 uppercase tracking-wide">
+                MEDICINA UNIFRAN - M16
+              </p>
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed">
+                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+              </p>
+            </div>
+
+            <Button
+              onClick={handleRestart}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-8 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mx-auto gap-2"
+            >
+              <RotateCcw size={22} />
+              Voltar ao Início
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Tela das Perguntas do Quiz
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-8">
       {/* Header */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <div className="max-w-4xl mx-auto mb-6">
+        <div className="flex items-center justify-between bg-white border-3 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <img
             src="/__manus__/logo-unifran.png"
             alt="UNIFRAN Logo"
-            className="h-16 object-contain"
+            className="h-12 object-contain"
           />
           <div className="text-right">
-            <p className="font-bold text-gray-700">Pergunta {currentIndex + 1} de {questions.length}</p>
-            <div className="w-64 h-3 bg-gray-300 border-2 border-black mt-2">
+            <p className="font-black text-sm md:text-base text-gray-800">
+              Pergunta {currentIndex + 1} de {questions.length}
+            </p>
+            <div className="w-48 md:w-64 h-3 bg-gray-200 border-2 border-black mt-1">
               <div
                 className="h-full bg-blue-600 transition-all duration-300"
                 style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
@@ -174,14 +227,14 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto">
-        {/* Question Card */}
-        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8 transform -rotate-1">
-          <div className="mb-6">
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black transform rotate-2 mb-4">
-              PERGUNTA {currentIndex + 1}
+        <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-10 mb-6 transform -rotate-1">
+          <div className="mb-4">
+            <span className="inline-block bg-blue-600 text-white font-black px-4 py-1.5 border-2 border-black text-sm uppercase transform rotate-1">
+              Questão {currentIndex + 1}
             </span>
           </div>
-          <h2 className="text-3xl font-black text-black mb-8 leading-tight">
+          
+          <h2 className="text-2xl md:text-3xl font-black text-black mb-8 leading-snug">
             {current.text}
           </h2>
 
@@ -189,21 +242,21 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:scale-[1.01] transition-transform"
               >
                 Revelar Resposta
               </Button>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fadeIn">
               {/* Answer Badge */}
-              <div className={`p-6 border-4 border-black transform -rotate-1 ${
+              <div className={`p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1 ${
                 isAnswerCorrect
                   ? "bg-blue-600 text-white"
                   : "bg-yellow-400 text-black"
               }`}>
-                <p className="text-sm font-bold uppercase tracking-wider mb-2">
-                  Resposta:
+                <p className="text-xs font-black uppercase tracking-wider mb-1">
+                  Resposta Correta:
                 </p>
                 <p className="text-4xl font-black uppercase">
                   {current.answer}!
@@ -211,11 +264,11 @@ export default function Home() {
               </div>
 
               {/* Explanation */}
-              <div className="bg-gray-100 border-3 border-black p-6 transform rotate-1">
-                <h3 className="font-black text-black mb-3 uppercase text-lg">
-                  Por quê?
+              <div className="bg-gray-50 border-3 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-1">
+                <h3 className="font-black text-black mb-2 uppercase text-base">
+                  Explicação Médica:
                 </h3>
-                <p className="text-gray-800 text-lg leading-relaxed font-semibold">
+                <p className="text-gray-900 text-lg leading-relaxed font-medium">
                   {current.explanation}
                 </p>
               </div>
@@ -223,27 +276,27 @@ export default function Home() {
               {/* Next Button */}
               <Button
                 onClick={handleNext}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-2"
               >
-                {currentIndex === questions.length - 1 ? "Finalizar" : "Próxima Pergunta"}
-                <ChevronRight size={24} />
+                {currentIndex === questions.length - 1 ? "Ver Tela Final" : "Próxima Pergunta"}
+                <ChevronRight size={26} />
               </Button>
             </div>
           )}
         </div>
 
-        {/* Tips Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white border-3 border-black p-4 transform rotate-1">
-            <p className="font-black text-black text-sm uppercase">💡 Dica</p>
-            <p className="text-gray-700 font-semibold text-sm mt-2">
-              Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
+        {/* Footer info inside quiz */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white border-3 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
+            <p className="font-black text-black text-xs uppercase">💡 Dica</p>
+            <p className="text-gray-700 font-medium text-xs mt-1">
+              Discuta com a turma antes de revelar se é verdade ou mito!
             </p>
           </div>
-          <div className="bg-white border-3 border-black p-4 transform -rotate-1">
-            <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
-            <p className="text-gray-700 font-semibold text-xs mt-2">
-              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+          <div className="bg-white border-3 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transform -rotate-1">
+            <p className="font-black text-black text-xs uppercase">MEDICINA UNIFRAN - M16</p>
+            <p className="text-gray-700 font-medium text-[11px] mt-1 leading-snug">
+              Felipe, Emiliana, Juliana, Clara, Mara, Vitor, Rosa
             </p>
           </div>
         </div>
