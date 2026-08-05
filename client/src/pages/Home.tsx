@@ -97,7 +97,7 @@ export default function Home() {
     setRevealed(true);
   };
 
-  const handleNextQuestion = () => {
+  const handleNext = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setRevealed(false);
@@ -122,18 +122,17 @@ export default function Home() {
     setDicaIndex(0);
   };
 
+  // Bloco de rodapé padronizado idêntico ao original da capa
   const RodapeEquipe = () => (
-    <div className="bg-gray-50 border-3 border-black p-4 text-center">
-      <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
-        MEDICINA UNIFRAN - M16
-      </p>
-      <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
-        Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
+    <div className="bg-white border-3 border-black p-4">
+      <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
+      <p className="text-gray-700 font-semibold text-xs mt-2 leading-relaxed">
+        Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
       </p>
     </div>
   );
 
-  // 1. CAPA
+  // 1. TELA DE CAPA (Página 1)
   if (step === "capa") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
@@ -155,8 +154,13 @@ export default function Home() {
               Mitos e Verdades
             </p>
 
-            <div className="mb-8">
-              <RodapeEquipe />
+            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center">
+              <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
+                MEDICINA UNIFRAN - M16
+              </p>
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
+              </p>
             </div>
 
             <Button
@@ -172,7 +176,7 @@ export default function Home() {
     );
   }
 
-  // 2. COMO FUNCIONA
+  // 2. TELA COMO FUNCIONA (Página 2)
   if (step === "como_funciona") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
@@ -212,7 +216,7 @@ export default function Home() {
     );
   }
 
-  // 3. DICAS DE OURO DA MEDICINA UNIFRAN
+  // 3. DICAS DE OURO DA MEDICINA UNIFRAN (Slides 1, 2 e 3)
   if (step === "dicas_ouro") {
     const dicasData = [
       {
@@ -344,7 +348,7 @@ export default function Home() {
     );
   }
 
-  // 6. QUIZ (Perguntas)
+  // 6. TELA DO QUIZ (Perguntas de 1 a 12)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
@@ -416,7 +420,7 @@ export default function Home() {
 
               {/* Next Button */}
               <Button
-                onClick={handleNextQuestion}
+                onClick={handleNext}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
                 {currentIndex === questions.length - 1 ? "Ver Dicas de Ouro" : "Próxima Pergunta"}
@@ -426,9 +430,20 @@ export default function Home() {
           )}
         </div>
 
-        {/* Rodapé padronizado idêntico ao da capa */}
-        <div className="mb-8">
-          <RodapeEquipe />
+        {/* Rodapés originais idênticos ao padrão do quiz */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="bg-white border-3 border-black p-4">
+            <p className="font-black text-black text-sm uppercase">💡 Dica</p>
+            <p className="text-gray-700 font-semibold text-sm mt-2">
+              Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
+            </p>
+          </div>
+          <div className="bg-white border-3 border-black p-4">
+            <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
+            <p className="text-gray-700 font-semibold text-xs mt-2 leading-relaxed">
+              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+            </p>
+          </div>
         </div>
       </div>
     </div>
