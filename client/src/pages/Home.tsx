@@ -122,12 +122,12 @@ export default function Home() {
     setDicaIndex(0);
   };
 
-  // 1. TELA DE CAPA (Página 1)
+  // 1. TELA DE CAPA
   if (step === "capa") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center transform -rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center">
             <div className="mb-6">
               <img
                 src="/__manus__/logo-unifran.png"
@@ -144,18 +144,18 @@ export default function Home() {
               Mitos e Verdades
             </p>
 
-            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center transform rotate-1">
+            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center">
               <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2 whitespace-nowrap overflow-x-auto">
                 Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
               </p>
             </div>
 
             <Button
               onClick={() => setStep("como_funciona")}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-transform cursor-pointer"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg flex items-center justify-center gap-2 transition-transform cursor-pointer"
             >
               <Play fill="black" size={24} />
               Iniciar Quiz
@@ -166,14 +166,14 @@ export default function Home() {
     );
   }
 
-  // 2. TELA COMO FUNCIONA (Página 2)
+  // 2. TELA COMO FUNCIONA
   if (step === "como_funciona") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 transform rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10">
             <div className="flex justify-between items-center mb-6">
-              <span className="bg-blue-600 text-white font-black px-4 py-1 text-sm border-2 border-black uppercase transform -rotate-2">
+              <span className="bg-blue-600 text-white font-black px-4 py-1 text-sm border-2 border-black uppercase">
                 Como Funciona
               </span>
               <img
@@ -187,7 +187,7 @@ export default function Home() {
               Como Funciona a Brincadeira?
             </h2>
 
-            <div className="space-y-4 text-gray-800 text-lg font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6 transform -rotate-1">
+            <div className="space-y-4 text-gray-800 text-lg font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6">
               <p>• Este quiz interativo aborda mitos e verdades comuns sobre a puberdade e a adolescência.</p>
               <p>• Para cada pergunta apresentada, clique em <strong className="text-black">"Revelar Resposta"</strong> para conferir se a afirmação é Verdade ou Mito, acompanhada de sua respectiva explicação médica.</p>
               <p>• Utilize os botões de navegação para avançar pelas questões e conferir as orientações finais.</p>
@@ -195,7 +195,7 @@ export default function Home() {
 
             <Button
               onClick={() => setStep("quiz")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-transform cursor-pointer"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transition-transform cursor-pointer"
             >
               Começar o Quiz
               <ChevronRight size={24} />
@@ -206,7 +206,7 @@ export default function Home() {
     );
   }
 
-  // 3. DICAS DE OURO DA MEDICINA UNIFRAN (3 slides)
+  // 3. DICAS DE OURO DA MEDICINA UNIFRAN
   if (step === "dicas_ouro") {
     const dicasData = [
       {
@@ -228,9 +228,9 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 transform -rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10">
             <div className="flex justify-between items-center mb-6">
-              <span className="bg-yellow-400 text-black font-black px-4 py-1 text-sm border-2 border-black uppercase transform rotate-2">
+              <span className="bg-yellow-400 text-black font-black px-4 py-1 text-sm border-2 border-black uppercase">
                 Dicas de Ouro {dicaIndex + 1} de 3
               </span>
               <img
@@ -244,13 +244,13 @@ export default function Home() {
               {dicaAtual.titulo}
             </h2>
 
-            <p className="text-gray-800 text-xl font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6 transform rotate-1">
+            <p className="text-gray-800 text-xl font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6">
               {dicaAtual.conteúdo}
             </p>
 
             <Button
               onClick={handleNextDica}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-transform cursor-pointer"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transition-transform cursor-pointer"
             >
               {dicaIndex === 2 ? "Ir para Referências" : "Próxima Dica"}
               <ChevronRight size={24} />
@@ -266,7 +266,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center transform rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center">
             <div className="mb-6">
               <img
                 src="/__manus__/logo-unifran.png"
@@ -276,30 +276,30 @@ export default function Home() {
             </div>
 
             <h2 className="text-3xl font-black text-black mb-6 uppercase border-b-2 border-black pb-3">
-              Referências Bibliográficas
+              Bibliografia
             </h2>
 
-            <div className="text-left bg-gray-50 border-3 border-black p-6 space-y-3 mb-8 text-sm md:text-base font-semibold text-gray-800 leading-relaxed transform -rotate-1">
+            <div className="text-left bg-gray-50 border-3 border-black p-6 space-y-3 mb-8 text-sm md:text-base font-semibold text-gray-800 leading-relaxed">
               <p>• Ministério da Saúde. Caderneta do Adolescente.</p>
               <p>• Estatuto da Criança e do Adolescente (ECA) - Lei nº 8.069/1990.</p>
               <p>• Código de Ética Médica - Conselho Federal de Medicina (CFM).</p>
               <p>• Sociedade Brasileira de Pediatria (SBP). Diretrizes de Saúde do Adolescente.</p>
             </div>
 
-            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center transform rotate-1">
+            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center">
               <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed">
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed whitespace-nowrap overflow-x-auto">
                 Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
               </p>
             </div>
 
             <Button
               onClick={() => setStep("concluido")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-transform cursor-pointer"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transition-transform cursor-pointer"
             >
-              Finalizar Apresentação
+              Finalizar
               <ChevronRight size={24} />
             </Button>
           </div>
@@ -313,7 +313,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-lg p-12 text-center transform -rotate-1">
+          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
             <h1 className="text-6xl font-black text-black mb-6 uppercase">
               Parabéns!
             </h1>
@@ -327,17 +327,17 @@ export default function Home() {
                 className="h-32 mx-auto object-contain"
               />
             </div>
-            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center transform rotate-1">
+            <div className="mb-8 border-3 border-black p-4 bg-gray-50 text-center">
               <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed">
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed whitespace-nowrap overflow-x-auto">
                 Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
               </p>
             </div>
             <Button
               onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black transform hover:scale-105 transition-transform cursor-pointer"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black transition-transform cursor-pointer"
             >
               <RotateCcw className="mr-2" />
               Começar de Novo
@@ -348,11 +348,11 @@ export default function Home() {
     );
   }
 
-  // 6. TELA DO QUIZ (Perguntas de 1 a 12)
+  // 6. TELA DO QUIZ (Perguntas de 1 a 12 com Contador Real)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
-      <div className="max-w-4xl mx-auto mb-8">
+      <div className="max-w-4xl mx-auto mb-8 pt-4">
         <div className="flex items-center justify-between mb-6">
           <img
             src="/__manus__/logo-unifran.png"
@@ -374,9 +374,9 @@ export default function Home() {
       {/* Main Content */}
       <div className="max-w-4xl mx-auto">
         {/* Question Card */}
-        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8 transform -rotate-1">
+        <div className="bg-white border-4 border-black shadow-xl p-8 mb-8">
           <div className="mb-6">
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black transform rotate-2 mb-4">
+            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black mb-4">
               PERGUNTA {currentIndex + 1}
             </span>
           </div>
@@ -388,7 +388,7 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform cursor-pointer"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transition-transform cursor-pointer"
               >
                 Revelar Resposta
               </Button>
@@ -396,7 +396,7 @@ export default function Home() {
           ) : (
             <div className="space-y-6">
               {/* Answer Badge */}
-              <div className={`p-6 border-4 border-black transform -rotate-1 ${
+              <div className={`p-6 border-4 border-black ${
                 isAnswerCorrect
                   ? "bg-blue-600 text-white"
                   : "bg-yellow-400 text-black"
@@ -410,7 +410,7 @@ export default function Home() {
               </div>
 
               {/* Explanation */}
-              <div className="bg-gray-100 border-3 border-black p-6 transform rotate-1">
+              <div className="bg-gray-100 border-3 border-black p-6">
                 <p className="font-black text-black mb-3 uppercase text-lg">
                   Por quê?
                 </p>
@@ -422,7 +422,7 @@ export default function Home() {
               {/* Next Button */}
               <Button
                 onClick={handleNext}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-transform cursor-pointer"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 transition-transform cursor-pointer"
               >
                 {currentIndex === questions.length - 1 ? "Ver Dicas de Ouro" : "Próxima Pergunta"}
                 <ChevronRight size={24} />
@@ -433,15 +433,15 @@ export default function Home() {
 
         {/* Tips Footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white border-3 border-black p-4 transform rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-black text-black text-sm uppercase">💡 Dica</p>
             <p className="text-gray-700 font-semibold text-sm mt-2">
               Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
             </p>
           </div>
-          <div className="bg-white border-3 border-black p-4 transform -rotate-1">
+          <div className="bg-white border-3 border-black p-4">
             <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
-            <p className="text-gray-700 font-semibold text-xs mt-2">
+            <p className="text-xs font-semibold text-gray-800 leading-relaxed whitespace-nowrap overflow-x-auto mt-2">
               Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
             </p>
           </div>
