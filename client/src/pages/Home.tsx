@@ -85,10 +85,10 @@ const questions: Question[] = [
 ];
 
 export default function Home() {
-  const [step, setStep] = useState<"capa" | "quiz" | "slides_finais" | "concluido">("capa");
+  const [step, setStep] = useState<"capa" | "como_funciona" | "quiz" | "dicas_ouro" | "referencias" | "concluido">("capa");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [finalSlideIndex, setFinalSlideIndex] = useState(0);
+  const [dicaIndex, setDicaIndex] = useState(0);
 
   const current = questions[currentIndex];
   const isAnswerCorrect = current.answer === "Verdade";
@@ -97,23 +97,21 @@ export default function Home() {
     setRevealed(true);
   };
 
-  const handleNext = () => {
+  const handleNextQuestion = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setRevealed(false);
     } else {
-      // Terminou as perguntas, entra nos slides finais solicitados
-      setStep("slides_finais");
-      setFinalSlideIndex(0);
+      setStep("dicas_ouro");
+      setDicaIndex(0);
     }
   };
 
-  const handleNextFinalSlide = () => {
-    // Conteúdo dos 4 slides adicionais enviados no final
-    if (finalSlideIndex < 3) {
-      setFinalSlideIndex(finalSlideIndex + 1);
+  const handleNextDica = () => {
+    if (dicaIndex < 2) {
+      setDicaIndex(dicaIndex + 1);
     } else {
-      setStep("concluido");
+      setStep("referencias");
     }
   };
 
@@ -121,10 +119,21 @@ export default function Home() {
     setStep("capa");
     setCurrentIndex(0);
     setRevealed(false);
-    setFinalSlideIndex(0);
+    setDicaIndex(0);
   };
 
-  // 1. TELA DE CAPA (Totalmente reta)
+  const RodapeEquipe = () => (
+    <div className="bg-gray-50 border-3 border-black p-4 text-center">
+      <p className="font-extrabold text-sm text-black mb-1 uppercase tracking-wide">
+        MEDICINA UNIFRAN - M16
+      </p>
+      <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+        Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
+      </p>
+    </div>
+  );
+
+  // 1. CAPA
   if (step === "capa") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
@@ -146,17 +155,12 @@ export default function Home() {
               Mitos e Verdades
             </p>
 
-            <div className="bg-gray-50 border-3 border-black p-5 mb-8 text-center">
-              <p className="font-extrabold text-sm text-black mb-2 uppercase tracking-wide">
-                MEDICINA UNIFRAN - M16
-              </p>
-              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
-                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
-              </p>
+            <div className="mb-8">
+              <RodapeEquipe />
             </div>
 
             <Button
-              onClick={() => setStep("quiz")}
+              onClick={() => setStep("como_funciona")}
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play fill="black" size={24} />
@@ -168,36 +172,15 @@ export default function Home() {
     );
   }
 
-  // 2. SLIDES FINAIS ADICIONAIS (Extraídos dos seus prints)
-  if (step === "slides_finais") {
-    const finalSlidesData = [
-      {
-        titulo: "Importância da Abordagem",
-        conteúdo: "Compreender as transformações da puberdade é essencial para acolher os adolescentes com empatia, reduzir mitos, tabus e orientar adequadamente sobre a saúde física e mental nessa fase de transição."
-      },
-      {
-        titulo: "O Papel do Profissional de Saúde",
-        conteúdo: "Oferecer um ambiente seguro, com escuta qualificada, respeito ao sigilo médico e orientação clara, fortalecendo a autonomia e o autocuidado do adolescente."
-      },
-      {
-        titulo: "Considerações Finais",
-        conteúdo: "A adolescência e a puberdade são processos plurais e individuais. Cada jovem vivencia seu desenvolvimento em seu próprio ritmo, exigindo suporte familiar e institucional adequado."
-      },
-      {
-        titulo: "Referências Bibliográficas",
-        conteúdo: "Ministério da Saúde - Caderneta do Adolescente; Estatuto da Criança e do Adolescente (ECA); Código de Ética Médica; Diretrizes de Saúde do Adolescente - SBP."
-      }
-    ];
-
-    const slideAtual = finalSlidesData[finalSlideIndex];
-
+  // 2. COMO FUNCIONA
+  if (step === "como_funciona") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 flex items-center justify-center">
-        <div className="max-w-3xl w-full">
-          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-12">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10">
             <div className="flex justify-between items-center mb-6">
-              <span className="bg-blue-600 text-white font-black px-4 py-1 text-sm border-2 border-black">
-                SLIDE FINAL {finalSlideIndex + 1} de 4
+              <span className="bg-blue-600 text-white font-black px-4 py-1 text-sm border-2 border-black uppercase">
+                Página 2
               </span>
               <img
                 src="/__manus__/logo-unifran.png"
@@ -207,18 +190,20 @@ export default function Home() {
             </div>
 
             <h2 className="text-3xl font-black text-black mb-6 uppercase border-b-2 border-black pb-3">
-              {slideAtual.titulo}
+              Como Funciona
             </h2>
 
-            <p className="text-gray-800 text-xl font-semibold leading-relaxed mb-10 bg-gray-50 border-3 border-black p-6">
-              {slideAtual.conteúdo}
-            </p>
+            <div className="space-y-4 text-gray-800 text-lg font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6">
+              <p>• Este quiz interativo aborda mitos e verdades comuns sobre a puberdade e a adolescência.</p>
+              <p>• Para cada pergunta apresentada, clique em <strong className="text-black">"Revelar Resposta"</strong> para conferir se a afirmação é Verdade ou Mito, acompanhada de sua respectiva explicação médica.</p>
+              <p>• Utilize os botões de navegação para avançar pelas questões e conferir as orientações finais.</p>
+            </div>
 
             <Button
-              onClick={handleNextFinalSlide}
+              onClick={() => setStep("quiz")}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              {finalSlideIndex === 3 ? "Concluir Apresentação" : "Próximo Slide"}
+              Ir para o Quiz
               <ChevronRight size={24} />
             </Button>
           </div>
@@ -227,37 +212,54 @@ export default function Home() {
     );
   }
 
-  // 3. TELA DE PARABÉNS / CONCLUSÃO (Totalmente reta)
-  if (step === "concluido") {
+  // 3. DICAS DE OURO DA MEDICINA UNIFRAN
+  if (step === "dicas_ouro") {
+    const dicasData = [
+      {
+        titulo: "Dicas de Ouro da Medicina UNIFRAN (1/3)",
+        conteúdo: "Compreender as transformações da puberdade é essencial para acolher os adolescentes com empatia, reduzir mitos, tabus e orientar adequadamente sobre a saúde física e mental nessa fase de transição."
+      },
+      {
+        titulo: "Dicas de Ouro da Medicina UNIFRAN (2/3)",
+        conteúdo: "Oferecer um ambiente seguro, com escuta qualificada, respeito ao sigilo médico e orientação clara, fortalecendo a autonomia e o autocuidado do adolescente."
+      },
+      {
+        titulo: "Dicas de Ouro da Medicina UNIFRAN (3/3)",
+        conteúdo: "A adolescência e a puberdade são processos plurais e individuais. Cada jovem vivencia seu desenvolvimento em seu próprio ritmo, exigindo suporte familiar e institucional adequado."
+      }
+    ];
+
+    const dicaAtual = dicasData[dicaIndex];
+
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
-            <h1 className="text-6xl font-black text-black mb-6 uppercase">
-              Parabéns!
-            </h1>
-            <p className="text-3xl font-bold text-gray-800 mb-8">
-              Você completou o quiz e os slides! 🎉
-            </p>
-            <div className="mb-8">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10">
+            <div className="flex justify-between items-center mb-6">
+              <span className="bg-yellow-400 text-black font-black px-4 py-1 text-sm border-2 border-black uppercase">
+                Dicas de Ouro {dicaIndex + 1} de 3
+              </span>
               <img
                 src="/__manus__/logo-unifran.png"
                 alt="UNIFRAN Logo"
-                className="h-32 mx-auto object-contain"
+                className="h-12 object-contain"
               />
             </div>
-            <p className="text-sm font-bold text-gray-700 mb-2 uppercase">
-              MEDICINA UNIFRAN - M16
+
+            <h2 className="text-2xl md:text-3xl font-black text-black mb-6 uppercase border-b-2 border-black pb-3 leading-tight">
+              {dicaAtual.titulo}
+            </h2>
+
+            <p className="text-gray-800 text-xl font-semibold leading-relaxed mb-8 bg-gray-50 border-3 border-black p-6">
+              {dicaAtual.conteúdo}
             </p>
-            <p className="text-xs text-gray-600 mb-8 leading-relaxed">
-              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
-            </p>
+
             <Button
-              onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black cursor-pointer flex items-center justify-center mx-auto"
+              onClick={handleNextDica}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              <RotateCcw className="mr-2" />
-              Começar de Novo
+              {dicaIndex === 2 ? "Ir para Referências" : "Próxima Dica"}
+              <ChevronRight size={24} />
             </Button>
           </div>
         </div>
@@ -265,7 +267,84 @@ export default function Home() {
     );
   }
 
-  // 4. TELA DO QUIZ (Perguntas de 1 a 12 - Totalmente reta)
+  // 4. REFERÊNCIAS BIBLIOGRÁFICAS
+  if (step === "referencias") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-10 text-center">
+            <div className="mb-6">
+              <img
+                src="/__manus__/logo-unifran.png"
+                alt="UNIFRAN Logo"
+                className="h-20 mx-auto object-contain"
+              />
+            </div>
+
+            <h2 className="text-3xl font-black text-black mb-6 uppercase border-b-2 border-black pb-3">
+              Referências Bibliográficas
+            </h2>
+
+            <div className="text-left bg-gray-50 border-3 border-black p-6 space-y-3 mb-8 text-sm md:text-base font-semibold text-gray-800 leading-relaxed">
+              <p>• Ministério da Saúde. Caderneta do Adolescente.</p>
+              <p>• Estatuto da Criança e do Adolescente (ECA) - Lei nº 8.069/1990.</p>
+              <p>• Código de Ética Médica - Conselho Federal de Medicina (CFM).</p>
+              <p>• Sociedade Brasileira de Pediatria (SBP). Diretrizes de Saúde do Adolescente.</p>
+            </div>
+
+            <div className="mb-8">
+              <RodapeEquipe />
+            </div>
+
+            <Button
+              onClick={() => setStep("concluido")}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+            >
+              Finalizar Apresentação
+              <ChevronRight size={24} />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 5. TELA DE CONCLUSÃO
+  if (step === "concluido") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
+            <h1 className="text-5xl font-black text-black mb-6 uppercase">
+              Parabéns!
+            </h1>
+            <p className="text-2xl font-bold text-gray-800 mb-8">
+              Você completou todo o material com sucesso! 🎉
+            </p>
+            <div className="mb-8">
+              <img
+                src="/__manus__/logo-unifran.png"
+                alt="UNIFRAN Logo"
+                className="h-28 mx-auto object-contain"
+              />
+            </div>
+            <div className="mb-8">
+              <RodapeEquipe />
+            </div>
+            <Button
+              onClick={handleRestart}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black cursor-pointer flex items-center justify-center mx-auto"
+            >
+              <RotateCcw className="mr-2" />
+              Recomeçar Apresentação
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 6. QUIZ (Perguntas)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
@@ -337,30 +416,19 @@ export default function Home() {
 
               {/* Next Button */}
               <Button
-                onClick={handleNext}
+                onClick={handleNextQuestion}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
-                {currentIndex === questions.length - 1 ? "Ver Slides Finais" : "Próxima Pergunta"}
+                {currentIndex === questions.length - 1 ? "Ver Dicas de Ouro" : "Próxima Pergunta"}
                 <ChevronRight size={24} />
               </Button>
             </div>
           )}
         </div>
 
-        {/* Tips Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white border-3 border-black p-4">
-            <p className="font-black text-black text-sm uppercase">💡 Dica</p>
-            <p className="text-gray-700 font-semibold text-sm mt-2">
-              Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
-            </p>
-          </div>
-          <div className="bg-white border-3 border-black p-4">
-            <p className="font-bold text-black text-base uppercase">MEDICINA UNIFRAN - M16</p>
-            <p className="text-gray-700 font-semibold text-xs mt-2 leading-relaxed">
-              Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
-            </p>
-          </div>
+        {/* Rodapé padronizado idêntico ao da capa */}
+        <div className="mb-8">
+          <RodapeEquipe />
         </div>
       </div>
     </div>
