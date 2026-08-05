@@ -62,7 +62,7 @@ const questions: Question[] = [
     id: 9,
     text: "As mudanças da puberdade acontecem de forma igual para todas as pessoas.",
     answer: "Mito",
-    explanation: "A ordem e a intensidade do aparecimento de pelos, voz grossa ou broto mamário variam completamente de pessoa para pessoa.",
+    explanation: "A ordem e a intensidade do aparecimento dos pelos, voz grossa ou broto mamário, varia completamente de pessoa para pessoa.",
   },
   {
     id: 10,
@@ -80,7 +80,7 @@ const questions: Question[] = [
     id: 12,
     text: "É normal o suor ficar com cheiro mais forte durante a puberdade.",
     answer: "Verdade",
-    explanation: "As glândulas sudoríparas apócrinas (nas axilas e virilha) 'acordam' na puberdade e produzem um suor especial que, ao entrar em contato com bactérias da pele, gera o odor.",
+    explanation: "As glândulas sudoríparas apócrinas (nas axilas e virilha) 'acordam' na puberdade e produzem um suor especial que, ao entrar em contato com bactérias da pele, geram o odor.",
   },
 ];
 
@@ -88,7 +88,6 @@ export default function Home() {
   const [started, setStarted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
 
   const current = questions[currentIndex];
@@ -111,7 +110,6 @@ export default function Home() {
     setStarted(false);
     setCurrentIndex(0);
     setRevealed(false);
-    setScore(0);
     setCompleted(false);
   };
 
@@ -137,18 +135,18 @@ export default function Home() {
               Mitos e Verdades
             </p>
 
-            <div className="bg-gray-50 border-3 border-black p-4 mb-8 transform rotate-1 text-left">
-              <p className="font-bold text-sm text-black mb-1 uppercase tracking-wide">
+            <div className="bg-gray-50 border-3 border-black p-5 mb-8 transform rotate-1 text-center">
+              <p className="font-extrabold text-sm text-black mb-2 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-700 leading-relaxed">
-                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
               </p>
             </div>
 
             <Button
               onClick={() => setStarted(true)}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform flex items-center justify-center gap-2"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play fill="black" size={24} />
               Iniciar Quiz
@@ -159,11 +157,12 @@ export default function Home() {
     );
   }
 
+  // Tela Final (Reto e organizado sem tortura visual)
   if (completed) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-lg p-8 md:p-12 text-center transform rotate-1">
+          <div className="bg-white border-4 border-black shadow-xl p-8 md:p-12 text-center">
             <h1 className="text-5xl font-black text-black mb-6 uppercase">
               Parabéns!
             </h1>
@@ -178,18 +177,18 @@ export default function Home() {
               />
             </div>
             
-            <div className="bg-blue-50 border-3 border-black p-6 mb-8 text-left">
+            <div className="bg-blue-50 border-3 border-black p-6 mb-8 text-center shadow-md">
               <p className="font-bold text-sm text-gray-900 mb-2 uppercase tracking-wide">
                 MEDICINA UNIFRAN - M16
               </p>
-              <p className="text-xs font-semibold text-gray-700 leading-relaxed">
-                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino, Vitor Krempel, Rosa Silva
+              <p className="text-xs font-semibold text-gray-800 leading-relaxed px-2">
+                Felipe Gomes, Emiliana Rezende, Juliana Volpe, Clara Prado, Mara Firmino,<br />Vitor Krempel, Rosa Silva
               </p>
             </div>
 
             <Button
               onClick={handleRestart}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 text-lg border-2 border-black cursor-pointer"
             >
               <RotateCcw className="mr-2" />
               Começar de Novo
@@ -239,7 +238,7 @@ export default function Home() {
             <div className="flex gap-4">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 px-6 text-xl border-3 border-black shadow-lg transform hover:scale-105 transition-transform cursor-pointer"
               >
                 Revelar Resposta
               </Button>
@@ -273,7 +272,7 @@ export default function Home() {
               {/* Next Button */}
               <Button
                 onClick={handleNext}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
                 {currentIndex === questions.length - 1 ? "Finalizar" : "Próxima Pergunta"}
                 <ChevronRight size={24} />
