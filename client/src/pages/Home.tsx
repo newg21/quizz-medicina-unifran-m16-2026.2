@@ -126,7 +126,7 @@ export default function Home() {
             </p>
             <div className="mb-12">
               <img
-                src="/manus-storage/unifran-logo_10c6e59e.png"
+                src="/__manus__/logo-unifran.png"
                 alt="UNIFRAN Logo"
                 className="h-32 mx-auto object-contain"
               />
@@ -153,7 +153,7 @@ export default function Home() {
       <div className="max-w-4xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-6">
           <img
-            src="/manus-storage/unifran-logo_10c6e59e.png"
+            src="/__manus__/logo-unifran.png"
             alt="UNIFRAN Logo"
             className="h-16 object-contain"
           />
