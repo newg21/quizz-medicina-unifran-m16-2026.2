@@ -124,7 +124,7 @@ export default function Home() {
               Parabéns!
             </h1>
             <p className="text-3xl font-bold text-gray-800 mb-8">
-              Você completou o quiz! 🎉
+              Vocês completaram o quiz! 🎉
             </p>
             <div className="mb-12">
               <img

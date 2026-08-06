@@ -19,7 +19,7 @@ export default function Final() {
           </div>
 
           <p className="text-lg font-black text-black mb-3 uppercase">
-            Você completou o quiz! 🎉
+            Vocês completaram o quiz! 🎉
           </p>
 
           <div className="mb-4">
