@@ -29,10 +29,10 @@ export default function Tips() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-5">
       <div className="max-w-4xl mx-auto">
         {/* Header with Logo */}
-        <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start justify-between mb-5">
           <div className="bg-yellow-400 border-4 border-black p-3 shadow-lg inline-block">
             <h1 className="text-2xl font-black text-black uppercase">
               Dicas de Ouro da Medicina UNIFRAN
@@ -46,11 +46,11 @@ export default function Tips() {
         </div>
 
         {/* Tips Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
           {tips.map((tip, index) => (
             <div
               key={index}
-              className="bg-white border-4 border-black p-3 shadow-lg"
+              className="bg-white border-4 border-black p-4 shadow-lg"
             >
               <div className="text-3xl mb-2">{tip.icon}</div>
               <h3 className="text-sm font-black text-black uppercase mb-1">
@@ -64,7 +64,7 @@ export default function Tips() {
         </div>
 
         {/* Important Message */}
-        <div className="bg-blue-600 text-white border-4 border-black p-3 shadow-lg mb-2">
+        <div className="bg-blue-600 text-white border-4 border-black p-4 shadow-lg mb-4">
           <h2 className="text-sm font-black uppercase mb-1">Lembre-se:</h2>
           <p className="text-xs font-bold leading-snug">
             A puberdade é uma fase normal e natural da vida. Cada pessoa passa por mudanças diferentes em tempos diferentes. 
@@ -73,7 +73,7 @@ export default function Tips() {
         </div>
 
         {/* Navigation */}
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <Button
             onClick={() => navigate("/quiz")}
             className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"
