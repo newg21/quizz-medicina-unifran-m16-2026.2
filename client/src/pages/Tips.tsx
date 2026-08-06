@@ -1,56 +1,95 @@
-import { Apple, Clock, Droplets, Scale } from "lucide-react";
-import { tips } from "@/data/quiz";
-import { PageNav } from "@/components/PageNav";
-import { SlideShell } from "@/components/SlideShell";
-
-const iconMap = {
-  apple: Apple,
-  droplets: Droplets,
-  clock: Clock,
-  scale: Scale,
-};
+import { useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Tips() {
-  return (
-    <SlideShell className="bg-gradient-to-br from-blue-50 to-yellow-50">
-      <div className="bg-yellow-400 border-[3px] border-black px-5 py-3 w-full text-center shadow-md shrink-0">
-        <h1 className="text-2xl sm:text-3xl font-black uppercase text-black tracking-tight">
-          Dicas de Ouro da Medicina UNIFRAN
-        </h1>
-      </div>
+  const [, navigate] = useLocation();
 
-      <div className="flex-1 min-h-0 grid grid-cols-2 grid-rows-2 gap-3 overflow-hidden">
-        {tips.map((tip) => {
-          const Icon = iconMap[tip.icon];
-          return (
+  const tips = [
+    {
+      icon: "🍎",
+      title: "Alimentação",
+      description: "Seu corpo precisa de combustível de qualidade para o crescimento. Priorize frutas, vegetais e muita água!",
+    },
+    {
+      icon: "🧼",
+      title: "Higiene",
+      description: "O suor mudou? É normal! Hora de reforçar o banho e usar um desodorante que você se sinta confortável.",
+    },
+    {
+      icon: "⏰",
+      title: "Respeite seu Tempo",
+      description: "Não se compare com os amigos. Cada corpo tem seu próprio relógio biológico e ritmo de mudança.",
+    },
+    {
+      icon: "👨‍⚕️",
+      title: "Busque Ajuda",
+      description: "Tem dúvidas ou algo te incomoda? Converse com seus pais, professores ou um profissional de saúde.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header with Logo */}
+        <div className="flex items-start justify-between mb-3">
+          <div className="bg-yellow-400 border-4 border-black p-3 shadow-lg inline-block">
+            <h1 className="text-2xl font-black text-black uppercase">
+              Dicas de Ouro da Medicina UNIFRAN
+            </h1>
+          </div>
+          <img
+            src="/manus-storage/unifran-logo_10c6e59e.png"
+            alt="UNIFRAN Logo"
+            className="h-16 object-contain ml-auto mr-8"
+          />
+        </div>
+
+        {/* Tips Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+          {tips.map((tip, index) => (
             <div
-              key={tip.title}
-              className="bg-white border-[3px] border-black px-4 py-4 shadow-md overflow-hidden flex flex-col justify-center"
+              key={index}
+              className="bg-white border-4 border-black p-3 shadow-lg"
             >
-              <div className="flex items-center gap-2 mb-2 shrink-0">
-                <Icon
-                  className="text-blue-600 shrink-0"
-                  size={24}
-                  strokeWidth={2.25}
-                />
-                <h2 className="text-base sm:text-lg font-black uppercase text-blue-600 leading-tight">
-                  {tip.title}
-                </h2>
-              </div>
-              <p className="text-gray-800 font-semibold text-sm sm:text-base leading-snug">
-                {tip.text}
+              <div className="text-3xl mb-2">{tip.icon}</div>
+              <h3 className="text-sm font-black text-black uppercase mb-1">
+                {tip.title}
+              </h3>
+              <p className="text-xs font-semibold leading-snug">
+                {tip.description}
               </p>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
 
-      <PageNav
-        backHref="/quiz"
-        backLabel="Voltar"
-        nextHref="/final"
-        nextLabel="Próximo"
-      />
-    </SlideShell>
+        {/* Important Message */}
+        <div className="bg-blue-600 text-white border-4 border-black p-3 shadow-lg mb-2">
+          <h2 className="text-sm font-black uppercase mb-1">Lembre-se:</h2>
+          <p className="text-xs font-bold leading-snug">
+            A puberdade é uma fase normal e natural da vida. Cada pessoa passa por mudanças diferentes em tempos diferentes. 
+            Não há pressa! Se tiver dúvidas ou preocupações, sempre procure um adulto de confiança ou um profissional de saúde.
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex gap-2">
+          <Button
+            onClick={() => navigate("/quiz")}
+            className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"
+          >
+            <ChevronLeft size={18} />
+            Voltar ao Quiz
+          </Button>
+          <Button
+            onClick={() => navigate("/final")}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"
+          >
+            Finalizar
+            <ChevronRight size={18} />
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

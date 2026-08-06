@@ -1,66 +1,57 @@
-import { AUTHORS_LINE1, AUTHORS_LINE2, COURSE_LABEL, LOGO_SRC } from "@/data/quiz";
-import { PageNav } from "@/components/PageNav";
+import { useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
-/** Capa — compacta e proporcional, mantendo os deslocamentos pedidos */
 export default function Cover() {
-  return (
-    <div className="h-dvh relative overflow-hidden bg-white">
-      <div
-        className="absolute inset-0"
-        aria-hidden
-        style={{
-          background:
-            "linear-gradient(122deg, #ffffff 0%, #ffffff 48%, #5BA3E0 48%, #5BA3E0 100%)",
-        }}
-      />
+  const [, navigate] = useLocation();
 
-      <div className="relative h-full w-full max-w-5xl mx-auto px-6 sm:px-8 py-6 sm:py-8 flex flex-col overflow-hidden">
-        <div className="flex-1 min-h-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pt-8 sm:pt-12">
-          <div className="flex flex-col gap-2.5 max-w-xl">
-            <div className="bg-[#F7E14A] border-[3px] border-black px-5 py-3.5 w-fit -rotate-2 shadow-[4px_4px_0_rgba(0,0,0,0.12)] ml-3 sm:ml-5">
-              <h1 className="text-[2.4rem] sm:text-[2.85rem] md:text-[3.25rem] font-black uppercase leading-[0.95] tracking-tight text-black">
-                Puberdade
-                <br />& Adolescência
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
+      <div className="max-w-5xl w-full">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Left Side - Title */}
+          <div>
+            <div className="bg-yellow-400 border-4 border-black p-6 mb-6 shadow-xl">
+              <h1 className="text-4xl md:text-5xl font-black text-black uppercase leading-snug">
+                Puberdade &<br />Adolescência
               </h1>
             </div>
-
-            <div className="bg-white border-[3px] border-black px-4 py-2 w-fit shadow-[3px_3px_0_rgba(0,0,0,0.1)] ml-7 sm:ml-11">
-              <p className="text-xl sm:text-2xl font-black text-black">
+            <div className="bg-white border-4 border-black p-6 shadow-lg mb-8">
+              <p className="text-3xl font-black text-black uppercase">
                 Verdade ou Mito?
               </p>
             </div>
-
-            <div className="flex flex-col gap-2.5 mt-8 sm:mt-10 ml-14 sm:ml-20">
-              <div className="bg-white border-[3px] border-black px-4 py-2 w-fit shadow-[3px_3px_0_rgba(0,0,0,0.1)]">
-                <p className="text-base sm:text-lg font-black uppercase tracking-wide text-black">
-                  {COURSE_LABEL}
-                </p>
-              </div>
-
-              <div className="bg-white border-[3px] border-black px-4 py-2.5 w-fit shadow-[3px_3px_0_rgba(0,0,0,0.1)]">
-                <p className="text-[0.8125rem] sm:text-sm font-semibold text-black leading-tight">
-                  <span className="block whitespace-nowrap">{AUTHORS_LINE1}</span>
-                  <span className="block whitespace-nowrap">{AUTHORS_LINE2}</span>
-                </p>
-              </div>
-            </div>
+            <Button
+              onClick={() => navigate("/como-funciona")}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-6 text-lg border-3 border-black shadow-lg flex items-center justify-center gap-2"
+            >
+              Começar
+              <ChevronRight size={24} />
+            </Button>
           </div>
 
-          <div className="bg-white border-[3px] border-black p-3.5 w-40 sm:w-48 md:w-52 shrink-0 self-center sm:self-start shadow-[4px_4px_0_rgba(0,0,0,0.12)]">
-            <img
-              src={LOGO_SRC}
-              alt="UNIFRAN Universidade de Franca"
-              className="w-full h-auto object-contain"
-            />
+          {/* Right Side - Logo */}
+          <div className="flex items-center justify-center">
+            <div className="bg-white border-4 border-black p-8 shadow-xl">
+              <img
+                src="/manus-storage/unifran-logo_10c6e59e.png"
+                alt="UNIFRAN Logo"
+                className="h-64 object-contain"
+              />
+            </div>
           </div>
         </div>
 
-        <div className="shrink-0">
-          <PageNav
-            nextHref="/como-funciona"
-            nextLabel="Próximo"
-            nextSize="large"
-          />
+        {/* Footer Info */}
+        <div className="mt-12 text-center">
+          <p className="font-black text-gray-700 text-lg uppercase">
+            Medicina UNIFRAN - M16
+          </p>
+          <p className="font-semibold text-gray-600 text-sm mt-2">
+            Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
+            Clara Prado, Vitor Krempel, Rosa Silva
+          </p>
         </div>
       </div>
     </div>
