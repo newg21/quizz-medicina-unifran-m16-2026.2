@@ -33,13 +33,13 @@ const questions: Question[] = [
     id: 4,
     text: "As adolescentes podem continuar crescendo após a primeira menstruação.",
     answer: "Verdade",
-    explanation: "A primeira menstruação (menarca) indica que o ritmo de crescimento vai desacelerar, mas a garota ainda costuma crescer de 5 a 7 cm depois disso.",
+    explanation: "A primeira menstruação (menarca) indica que o ritmo de crescimento vai desacelerar, mas a garota ainda costuma crescer entre 4 a 6 cm depois disso.",
   },
   {
     id: 5,
     text: "A adolescência é a mesma coisa de puberdade.",
     answer: "Mito",
-    explanation: "A puberdade é a transformação física e biológica do corpo. A adolescência é o período social e emocional de transição para a vida adulta.",
+    explanation: "A puberdade é a transformação física e biológica do corpo. Já a adolescência é o período social e emocional de transição para a vida adulta (dos 10 aos 20 anos).",
   },
   {
     id: 6,
