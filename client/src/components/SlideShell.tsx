@@ -3,13 +3,12 @@ import type { ReactNode } from "react";
 type SlideShellProps = {
   children: ReactNode;
   className?: string;
-  /** Conteúdo sem o frame interno (ex.: capa com fundo full-bleed) */
   bare?: boolean;
 };
 
-/** Mesmo “slide” em todas as páginas: altura da janela + área útil idêntica */
+/** Quadro largo para projeção (16:9) — mesma área em todas as páginas */
 export const SLIDE_FRAME =
-  "w-full h-full max-w-4xl mx-auto px-6 sm:px-8 py-6 sm:py-7 flex flex-col min-h-0 overflow-hidden";
+  "w-full h-full max-w-6xl mx-auto px-8 sm:px-10 lg:px-12 py-5 sm:py-6 flex flex-col min-h-0 overflow-hidden";
 
 export function SlideShell({
   children,
@@ -20,11 +19,7 @@ export function SlideShell({
     <div
       className={`h-dvh max-h-dvh w-full overflow-hidden flex flex-col ${className}`}
     >
-      {bare ? (
-        children
-      ) : (
-        <div className={SLIDE_FRAME}>{children}</div>
-      )}
+      {bare ? children : <div className={SLIDE_FRAME}>{children}</div>}
     </div>
   );
 }

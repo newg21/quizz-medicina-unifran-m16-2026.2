@@ -39,19 +39,31 @@ export default function Quiz() {
     }
   };
 
+  const authorsBox = (
+    <div className="bg-white border-2 border-black px-4 py-2 w-fit text-center shadow-sm">
+      <p className="font-black text-black text-sm uppercase tracking-wide">
+        {COURSE_LABEL}
+      </p>
+      <p className="text-gray-800 font-semibold text-[12px] sm:text-[13px] mt-0.5 leading-tight">
+        <span className="block whitespace-nowrap">{AUTHORS_LINE1}</span>
+        <span className="block whitespace-nowrap">{AUTHORS_LINE2}</span>
+      </p>
+    </div>
+  );
+
   return (
     <SlideShell className="bg-gradient-to-br from-blue-50 to-yellow-50">
       <header className="flex items-center justify-between gap-4 mb-4 shrink-0 w-full">
         <img
           src={LOGO_SRC}
           alt="UNIFRAN Logo"
-          className="h-12 sm:h-14 object-contain"
+          className="h-14 sm:h-16 object-contain"
         />
         <div className="text-right">
-          <p className="font-bold text-gray-700 text-sm sm:text-base">
+          <p className="font-bold text-gray-700 text-base sm:text-lg">
             Pergunta {currentIndex + 1} de {questions.length}
           </p>
-          <div className="w-52 sm:w-64 h-2.5 bg-gray-300 border-2 border-black mt-1 ml-auto">
+          <div className="w-56 sm:w-72 h-3 bg-gray-300 border-2 border-black mt-1.5 ml-auto">
             <div
               className="h-full bg-blue-600 transition-all duration-300"
               style={{
@@ -62,14 +74,14 @@ export default function Quiz() {
         </div>
       </header>
 
-      <section className="bg-white border-4 border-black shadow-xl px-5 py-5 sm:px-6 sm:py-6 mb-3 flex-1 min-h-0 flex flex-col overflow-hidden w-full">
-        {/* Pergunta + resposta juntas no topo, com distância fixa — sem “buraco” no meio */}
-        <div className="shrink-0 flex flex-col gap-4">
+      {/* Cartão: conteúdo centralizado — sem buraco vazio embaixo */}
+      <section className="bg-white border-4 border-black shadow-xl px-6 py-6 sm:px-8 sm:py-7 mb-3 flex-1 min-h-0 flex flex-col justify-center overflow-hidden w-full">
+        <div className="flex flex-col gap-5 max-w-4xl mx-auto w-full">
           <div>
-            <span className="inline-block bg-blue-600 text-white font-black px-3 py-1.5 border-2 border-black mb-3 w-fit text-sm">
+            <span className="inline-block bg-blue-600 text-white font-black px-4 py-1.5 border-2 border-black mb-3 w-fit text-sm sm:text-base">
               PERGUNTA {currentIndex + 1}
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-[1.7rem] font-black text-black leading-snug w-full">
+            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-black text-black leading-snug w-full">
               {current.text}
             </h2>
           </div>
@@ -77,53 +89,39 @@ export default function Quiz() {
           {!revealed ? (
             <Button
               onClick={handleReveal}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-5 text-xl border-2 border-black shadow-lg"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-6 text-xl sm:text-2xl border-2 border-black shadow-lg"
             >
               Revelar Resposta
             </Button>
           ) : (
             <div className="flex flex-col gap-3">
               <div
-                className={`w-full px-4 py-3 border-4 border-black ${
+                className={`w-full px-5 py-3.5 border-4 border-black ${
                   isVerdade
                     ? "bg-blue-600 text-white"
                     : "bg-yellow-400 text-black"
                 }`}
               >
-                <p className="text-xs font-bold uppercase tracking-wider">
+                <p className="text-sm font-bold uppercase tracking-wider">
                   Resposta:
                 </p>
-                <p className="text-2xl sm:text-3xl font-black uppercase leading-none mt-0.5">
+                <p className="text-3xl sm:text-4xl font-black uppercase leading-none mt-1">
                   {current.answer}!
                 </p>
               </div>
 
-              <div className="w-full bg-gray-100 border-2 border-black px-4 py-3">
-                <h3 className="font-black text-black mb-1 uppercase text-sm">
+              <div className="w-full bg-gray-100 border-2 border-black px-5 py-4">
+                <h3 className="font-black text-black mb-1.5 uppercase text-base">
                   Por quê?
                 </h3>
-                <p className="text-gray-800 text-sm sm:text-base leading-snug font-semibold">
+                <p className="text-gray-800 text-base sm:text-lg leading-snug font-semibold">
                   {current.explanation}
                 </p>
               </div>
             </div>
           )}
         </div>
-
-        <div className="flex-1 min-h-0" aria-hidden />
       </section>
-
-      <div className="mb-2 shrink-0 w-full flex justify-center">
-        <div className="bg-white border-2 border-black px-4 py-2.5 w-fit text-center">
-          <p className="font-black text-black text-sm uppercase tracking-wide">
-            {COURSE_LABEL}
-          </p>
-          <p className="text-gray-800 font-semibold text-[12px] sm:text-[13px] mt-1 leading-tight">
-            <span className="block whitespace-nowrap">{AUTHORS_LINE1}</span>
-            <span className="block whitespace-nowrap">{AUTHORS_LINE2}</span>
-          </p>
-        </div>
-      </div>
 
       <footer className="shrink-0 w-full">
         <PageNav
@@ -133,6 +131,7 @@ export default function Quiz() {
           nextLabel={
             currentIndex === questions.length - 1 ? "Finalizar" : "Próximo"
           }
+          center={authorsBox}
         />
       </footer>
     </SlideShell>
