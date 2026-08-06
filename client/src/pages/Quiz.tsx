@@ -39,31 +39,19 @@ export default function Quiz() {
     }
   };
 
-  const authorsBox = (
-    <div className="bg-white border-2 border-black px-4 py-2 w-fit text-center shadow-sm">
-      <p className="font-black text-black text-sm uppercase tracking-wide">
-        {COURSE_LABEL}
-      </p>
-      <p className="text-gray-800 font-semibold text-[12px] sm:text-[13px] mt-0.5 leading-tight">
-        <span className="block whitespace-nowrap">{AUTHORS_LINE1}</span>
-        <span className="block whitespace-nowrap">{AUTHORS_LINE2}</span>
-      </p>
-    </div>
-  );
-
   return (
     <SlideShell className="bg-gradient-to-br from-blue-50 to-yellow-50">
-      <header className="flex items-center justify-between gap-4 mb-4 shrink-0 w-full">
+      <header className="flex items-center justify-between gap-3 shrink-0 w-full">
         <img
           src={LOGO_SRC}
           alt="UNIFRAN Logo"
-          className="h-14 sm:h-16 object-contain"
+          className="h-11 sm:h-12 object-contain"
         />
         <div className="text-right">
-          <p className="font-bold text-gray-700 text-base sm:text-lg">
+          <p className="font-bold text-gray-700 text-sm sm:text-base">
             Pergunta {currentIndex + 1} de {questions.length}
           </p>
-          <div className="w-56 sm:w-72 h-3 bg-gray-300 border-2 border-black mt-1.5 ml-auto">
+          <div className="w-48 sm:w-56 h-2.5 bg-gray-300 border-2 border-black mt-1 ml-auto">
             <div
               className="h-full bg-blue-600 transition-all duration-300"
               style={{
@@ -74,66 +62,73 @@ export default function Quiz() {
         </div>
       </header>
 
-      {/* Cartão: conteúdo centralizado — sem buraco vazio embaixo */}
-      <section className="bg-white border-4 border-black shadow-xl px-6 py-6 sm:px-8 sm:py-7 mb-3 flex-1 min-h-0 flex flex-col justify-center overflow-hidden w-full">
-        <div className="flex flex-col gap-5 max-w-4xl mx-auto w-full">
-          <div>
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-1.5 border-2 border-black mb-3 w-fit text-sm sm:text-base">
-              PERGUNTA {currentIndex + 1}
-            </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-black text-black leading-snug w-full">
-              {current.text}
-            </h2>
-          </div>
+      <section className="bg-white border-[3px] border-black shadow-lg px-5 py-4 sm:px-6 sm:py-5 flex-1 min-h-0 flex flex-col overflow-hidden w-full">
+        <span className="inline-block bg-blue-600 text-white font-black px-3 py-1 border-2 border-black mb-2.5 w-fit text-xs sm:text-sm shrink-0">
+          PERGUNTA {currentIndex + 1}
+        </span>
 
+        <h2 className="text-xl sm:text-2xl font-black text-black leading-snug shrink-0 mb-3">
+          {current.text}
+        </h2>
+
+        <div className="flex flex-col gap-2.5 shrink-0">
           {!revealed ? (
             <Button
               onClick={handleReveal}
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-6 text-xl sm:text-2xl border-2 border-black shadow-lg"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-4 text-lg border-2 border-black shadow-md"
             >
               Revelar Resposta
             </Button>
           ) : (
-            <div className="flex flex-col gap-3">
+            <>
               <div
-                className={`w-full px-5 py-3.5 border-4 border-black ${
+                className={`w-full px-4 py-2.5 border-[3px] border-black ${
                   isVerdade
                     ? "bg-blue-600 text-white"
                     : "bg-yellow-400 text-black"
                 }`}
               >
-                <p className="text-sm font-bold uppercase tracking-wider">
+                <p className="text-[11px] font-bold uppercase tracking-wider">
                   Resposta:
                 </p>
-                <p className="text-3xl sm:text-4xl font-black uppercase leading-none mt-1">
+                <p className="text-2xl sm:text-[1.75rem] font-black uppercase leading-none mt-0.5">
                   {current.answer}!
                 </p>
               </div>
 
-              <div className="w-full bg-gray-100 border-2 border-black px-5 py-4">
-                <h3 className="font-black text-black mb-1.5 uppercase text-base">
+              <div className="w-full bg-gray-100 border-2 border-black px-4 py-2.5">
+                <h3 className="font-black text-black mb-1 uppercase text-sm">
                   Por quê?
                 </h3>
-                <p className="text-gray-800 text-base sm:text-lg leading-snug font-semibold">
+                <p className="text-gray-800 text-sm sm:text-base leading-snug font-semibold">
                   {current.explanation}
                 </p>
               </div>
-            </div>
+            </>
           )}
+        </div>
+
+        <div className="mt-auto pt-3 shrink-0 flex justify-center">
+          <div className="bg-white border-2 border-black px-3 py-1.5 w-fit text-center">
+            <p className="font-black text-black text-xs uppercase tracking-wide">
+              {COURSE_LABEL}
+            </p>
+            <p className="text-gray-700 font-semibold text-[11px] sm:text-xs mt-0.5 leading-tight">
+              <span className="block whitespace-nowrap">{AUTHORS_LINE1}</span>
+              <span className="block whitespace-nowrap">{AUTHORS_LINE2}</span>
+            </p>
+          </div>
         </div>
       </section>
 
-      <footer className="shrink-0 w-full">
-        <PageNav
-          onBack={handleBack}
-          backLabel="Voltar"
-          onNext={handleNext}
-          nextLabel={
-            currentIndex === questions.length - 1 ? "Finalizar" : "Próximo"
-          }
-          center={authorsBox}
-        />
-      </footer>
+      <PageNav
+        onBack={handleBack}
+        backLabel="Voltar"
+        onNext={handleNext}
+        nextLabel={
+          currentIndex === questions.length - 1 ? "Finalizar" : "Próximo"
+        }
+      />
     </SlideShell>
   );
 }

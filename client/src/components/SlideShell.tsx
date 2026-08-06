@@ -6,9 +6,9 @@ type SlideShellProps = {
   bare?: boolean;
 };
 
-/** Quadro largo para projeção (16:9) — mesma área em todas as páginas */
+/** Quadro compacto e proporcional para projeção */
 export const SLIDE_FRAME =
-  "w-full h-full max-w-6xl mx-auto px-8 sm:px-10 lg:px-12 py-5 sm:py-6 flex flex-col min-h-0 overflow-hidden";
+  "w-full h-full max-w-5xl mx-auto px-6 sm:px-8 py-4 sm:py-5 flex flex-col min-h-0 overflow-hidden gap-3";
 
 export function SlideShell({
   children,
