@@ -138,8 +138,14 @@ export default function Home() {
                 Medicina UNIFRAN - M16
               </p>
               <p className="text-xs md:text-sm font-semibold text-gray-700 px-1">
-                Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
-                Clara Prado, Vitor Krempel, Rosa Silva
+                <span className="md:hidden">
+                  Felipe Gomes, Mara Firmino, Emiliana Rezende,<br />
+                  Juliana Volpe, Clara Prado, Vitor Krempel, Rosa Silva
+                </span>
+                <span className="hidden md:inline">
+                  Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
+                  Clara Prado, Vitor Krempel, Rosa Silva
+                </span>
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
