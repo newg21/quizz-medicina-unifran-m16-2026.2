@@ -13,10 +13,10 @@ export default function HowItWorks() {
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
-            className="h-12 object-contain mb-2"
+            className="h-10 md:h-12 object-contain mb-2"
           />
-          <div className="bg-yellow-400 border-4 border-black p-3 shadow-lg inline-block">
-            <h1 className="text-2xl font-black text-black uppercase">
+          <div className="bg-yellow-400 border-4 border-black p-2.5 md:p-3 shadow-lg inline-block max-w-full">
+            <h1 className="text-xl md:text-2xl font-black text-black uppercase leading-snug">
               Como Funciona a Brincadeira?
             </h1>
           </div>
@@ -26,21 +26,21 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
           {/* Panel 1 */}
           <div className="bg-blue-600 text-white border-4 border-black shadow-lg p-3">
-            <div className="text-4xl font-black mb-2">1</div>
+            <div className="text-3xl md:text-4xl font-black mb-2">1</div>
             <p className="text-sm font-black uppercase mb-2">Vamos apresentar afirmações sobre o corpo.</p>
             <div className="text-3xl">📄</div>
           </div>
 
           {/* Panel 2 */}
           <div className="bg-white border-4 border-black shadow-lg p-3">
-            <div className="text-4xl font-black text-black mb-2">2</div>
+            <div className="text-3xl md:text-4xl font-black text-black mb-2">2</div>
             <p className="text-sm font-black text-black uppercase mb-2">Vocês decidem: é VERDADE ou MITO?</p>
             <div className="text-3xl">❓</div>
           </div>
 
           {/* Panel 3 */}
           <div className="bg-yellow-400 border-4 border-black shadow-lg p-3">
-            <div className="text-4xl font-black text-black mb-2">3</div>
+            <div className="text-3xl md:text-4xl font-black text-black mb-2">3</div>
             <p className="text-sm font-black text-black uppercase mb-2">Revelamos a resposta e explicamos!</p>
             <div className="text-3xl">💡</div>
           </div>
@@ -48,7 +48,7 @@ export default function HowItWorks() {
 
         {/* Info Box */}
         <div className="bg-white border-4 border-black p-3 shadow-lg mb-3">
-          <h2 className="text-lg font-black text-black uppercase mb-2">O que você vai aprender:</h2>
+          <h2 className="text-base md:text-lg font-black text-black uppercase mb-2">O que você vai aprender:</h2>
           <ul className="space-y-1 text-sm font-bold text-gray-800">
             <li>✓ Fatos sobre puberdade e adolescência</li>
             <li>✓ Mudanças normais do corpo</li>
@@ -59,7 +59,7 @@ export default function HowItWorks() {
 
         {/* Footer */}
         {/* Navigation */}
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button
             onClick={() => navigate("/")}
             className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"

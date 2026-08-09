@@ -119,39 +119,39 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <div className="bg-white border-4 border-black shadow-lg p-12 text-center">
-            <h1 className="text-6xl font-black text-black mb-6 uppercase">
+          <div className="bg-white border-4 border-black shadow-lg p-6 md:p-12 text-center">
+            <h1 className="text-4xl md:text-6xl font-black text-black mb-4 md:mb-6 uppercase">
               Parabéns!
             </h1>
-            <p className="text-3xl font-bold text-gray-800 mb-8">
+            <p className="text-xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8">
               Vocês completaram o quiz! 🎉
             </p>
-            <div className="mb-12">
+            <div className="mb-8 md:mb-12">
               <img
                 src="/manus-storage/unifran-logo_10c6e59e.png"
                 alt="UNIFRAN Logo"
-                className="h-32 mx-auto object-contain"
+                className="h-20 md:h-32 mx-auto object-contain"
               />
             </div>
-            <div className="text-center mb-8">
-              <p className="text-xl font-bold text-gray-700 mb-2">
+            <div className="text-center mb-6 md:mb-8">
+              <p className="text-lg md:text-xl font-bold text-gray-700 mb-2">
                 Medicina UNIFRAN - M16
               </p>
-              <p className="text-sm font-semibold text-gray-700">
+              <p className="text-xs md:text-sm font-semibold text-gray-700 px-1">
                 Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
                 Clara Prado, Vitor Krempel, Rosa Silva
               </p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button
                 onClick={() => navigate("/tips")}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-3 px-6 text-lg border-3 border-black"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-2.5 md:py-3 px-6 text-base md:text-lg border-3 border-black"
               >
                 Dicas de Ouro
               </Button>
               <Button
                 onClick={handleRestart}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-6 text-lg border-3 border-black"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-2.5 md:py-3 px-6 text-base md:text-lg border-3 border-black"
               >
                 Recomeçar
               </Button>
@@ -166,15 +166,17 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
       <div className="max-w-4xl mx-auto mb-3">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
-            className="h-16 object-contain"
+            className="h-12 md:h-16 object-contain shrink-0"
           />
-          <div className="text-right">
-            <p className="font-bold text-gray-700">Pergunta {currentIndex + 1} de {questions.length}</p>
-            <div className="w-64 h-3 bg-gray-300 border-2 border-black mt-2">
+          <div className="text-right min-w-0">
+            <p className="font-bold text-gray-700 text-sm md:text-base">
+              Pergunta {currentIndex + 1} de {questions.length}
+            </p>
+            <div className="w-36 sm:w-48 md:w-64 h-3 bg-gray-300 border-2 border-black mt-2 ml-auto">
               <div
                 className="h-full bg-blue-600 transition-all duration-300"
                 style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
@@ -187,13 +189,13 @@ export default function Home() {
       {/* Main Content */}
       <div className="max-w-4xl mx-auto">
         {/* Question Card */}
-        <div className="bg-white border-4 border-black shadow-xl p-5 mb-3">
+        <div className="bg-white border-4 border-black shadow-xl p-4 md:p-5 mb-3">
           <div className="mb-2">
-            <span className="inline-block bg-blue-600 text-white font-black px-4 py-2 border-2 border-black mb-4">
+            <span className="inline-block bg-blue-600 text-white font-black px-3 md:px-4 py-1.5 md:py-2 border-2 border-black mb-3 md:mb-4 text-sm md:text-base">
               PERGUNTA {currentIndex + 1}
             </span>
           </div>
-          <h2 className="text-2xl font-black text-black mb-3 leading-tight">
+          <h2 className="text-xl md:text-2xl font-black text-black mb-3 leading-tight">
             {current.text}
           </h2>
 
@@ -201,7 +203,7 @@ export default function Home() {
             <div className="flex gap-4 mt-2">
               <Button
                 onClick={handleReveal}
-                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-3 px-6 text-lg border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-3 px-6 text-base md:text-lg border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
               >
                 Revelar Resposta
               </Button>
@@ -217,7 +219,7 @@ export default function Home() {
                 <p className="text-xs font-bold uppercase tracking-wider mb-1">
                   Resposta:
                 </p>
-                <p className="text-3xl font-black uppercase">
+                <p className="text-2xl md:text-3xl font-black uppercase">
                   {current.answer}!
                 </p>
               </div>
@@ -260,7 +262,7 @@ export default function Home() {
 
         {/* Tips Footer */}
         <div className="mb-2">
-          <div className="bg-white border-3 border-black p-4">
+          <div className="bg-white border-3 border-black p-3 md:p-4">
             <p className="font-black text-black text-sm uppercase">💡 Dica</p>
             <p className="text-gray-700 font-semibold text-sm mt-2">
               Clique em "Revelar Resposta" para descobrir se é verdade ou mito!
