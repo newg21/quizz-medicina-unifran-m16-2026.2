@@ -41,7 +41,7 @@ export default function Tips() {
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
-            className="h-12 md:h-16 object-contain md:ml-auto md:mr-8"
+            className="h-12 md:h-16 object-contain mx-auto md:mx-0 md:ml-auto md:mr-8"
           />
         </div>
 
