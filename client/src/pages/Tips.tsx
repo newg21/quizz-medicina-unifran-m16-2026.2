@@ -31,8 +31,8 @@ export default function Tips() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-5">
       <div className="max-w-4xl mx-auto">
-        {/* Header with Logo */}
-        <div className="flex flex-col md:flex-row items-start md:justify-between gap-3 mb-4 md:mb-5">
+        {/* Header with Logo — no mobile: logo em cima; no desktop: igual */}
+        <div className="flex flex-col-reverse md:flex-row items-start md:justify-between gap-3 mb-4 md:mb-5">
           <div className="bg-yellow-400 border-4 border-black p-2.5 md:p-3 shadow-lg inline-block max-w-full">
             <h1 className="text-lg md:text-2xl font-black text-black uppercase leading-snug">
               Dicas de Ouro da Medicina UNIFRAN
