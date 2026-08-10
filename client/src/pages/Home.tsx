@@ -180,7 +180,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
-      {/* Header */}
+      {/* Header — sticky só no mobile; no desktop, disposição original do logo/contador */}
       <div className="max-w-4xl mx-auto mb-3 sticky top-0 z-20 -mx-4 px-4 py-2 bg-gradient-to-br from-blue-50 to-yellow-50 md:static md:mx-0 md:px-0 md:py-0 md:bg-transparent">
         <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">
           <img
@@ -188,10 +188,10 @@ export default function Home() {
             alt="UNIFRAN Logo"
             className="h-12 md:h-16 object-contain shrink-0"
           />
-          <div className="text-right flex-1 min-w-0">
+          <div className="text-right min-w-0 flex-1 md:flex-none">
             <p
               key={`counter-${questionNumber}`}
-              className="font-bold text-gray-700 text-sm md:text-base whitespace-nowrap"
+              className="font-bold text-gray-700 text-sm md:text-base max-md:whitespace-nowrap"
               aria-live="polite"
             >
               Pergunta {questionNumber} de {totalQuestions}
