@@ -180,25 +180,52 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
-      {/* Header — sticky só no mobile; no desktop, disposição original do logo/contador */}
-      <div className="max-w-4xl mx-auto mb-3 sticky top-0 z-20 -mx-4 px-4 py-2 bg-gradient-to-br from-blue-50 to-yellow-50 md:static md:mx-0 md:px-0 md:py-0 md:bg-transparent">
-        <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">
+      {/* Header mobile — layout atual que ficou ótimo */}
+      <div className="md:hidden max-w-4xl mx-auto mb-3 sticky top-0 z-20 -mx-4 px-4 py-2 bg-gradient-to-br from-blue-50 to-yellow-50">
+        <div className="flex items-center justify-between gap-3 mb-4">
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
-            className="h-12 md:h-16 object-contain shrink-0"
+            className="h-12 object-contain shrink-0"
           />
-          <div className="text-right min-w-0 flex-1 md:flex-none">
+          <div className="text-right flex-1 min-w-0">
             <p
-              key={`counter-${questionNumber}`}
-              className="font-bold text-gray-700 text-sm md:text-base max-md:whitespace-nowrap"
+              key={`counter-m-${questionNumber}`}
+              className="font-bold text-gray-700 text-sm whitespace-nowrap"
               aria-live="polite"
             >
               Pergunta {questionNumber} de {totalQuestions}
             </p>
-            <div className="w-full md:w-64 h-3 bg-gray-300 border-2 border-black mt-2 ml-auto overflow-hidden">
+            <div className="w-full h-3 bg-gray-300 border-2 border-black mt-2 ml-auto overflow-hidden">
               <div
-                key={`progress-${questionNumber}`}
+                key={`progress-m-${questionNumber}`}
+                className="h-full bg-blue-600"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Header desktop — disposição original (antes do ajuste do contador) */}
+      <div className="hidden md:block max-w-4xl mx-auto mb-3">
+        <div className="flex items-center justify-between mb-6">
+          <img
+            src="/manus-storage/unifran-logo_10c6e59e.png"
+            alt="UNIFRAN Logo"
+            className="h-16 object-contain"
+          />
+          <div className="text-right">
+            <p
+              key={`counter-d-${questionNumber}`}
+              className="font-bold text-gray-700"
+              aria-live="polite"
+            >
+              Pergunta {questionNumber} de {totalQuestions}
+            </p>
+            <div className="w-64 h-3 bg-gray-300 border-2 border-black mt-2">
+              <div
+                key={`progress-d-${questionNumber}`}
                 className="h-full bg-blue-600"
                 style={{ width: `${progressPercent}%` }}
               />
