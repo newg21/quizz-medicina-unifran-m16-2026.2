@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ChevronLeft } from "lucide-react";
@@ -94,6 +94,14 @@ export default function Home() {
 
   const current = questions[currentIndex];
   const isAnswerCorrect = current.answer === "Verdade";
+  const questionNumber = currentIndex + 1;
+  const totalQuestions = questions.length;
+  const progressPercent = (questionNumber / totalQuestions) * 100;
+
+  // Mantém o contador visível no mobile após revelar a resposta
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentIndex]);
 
   const handleReveal = () => {
     setRevealed(true);
@@ -101,7 +109,7 @@ export default function Home() {
 
   const handleNext = () => {
     if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((i) => i + 1);
       setRevealed(false);
     } else {
       setCompleted(true);
@@ -150,12 +158,14 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button
+                type="button"
                 onClick={() => navigate("/tips")}
                 className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-2.5 md:py-3 px-6 text-base md:text-lg border-3 border-black"
               >
                 Dicas de Ouro
               </Button>
               <Button
+                type="button"
                 onClick={handleRestart}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-2.5 md:py-3 px-6 text-base md:text-lg border-3 border-black"
               >
@@ -171,21 +181,26 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4">
       {/* Header */}
-      <div className="max-w-4xl mx-auto mb-3">
+      <div className="max-w-4xl mx-auto mb-3 sticky top-0 z-20 -mx-4 px-4 py-2 bg-gradient-to-br from-blue-50 to-yellow-50 md:static md:mx-0 md:px-0 md:py-0 md:bg-transparent">
         <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
             className="h-12 md:h-16 object-contain shrink-0"
           />
-          <div className="text-right min-w-0">
-            <p className="font-bold text-gray-700 text-sm md:text-base">
-              Pergunta {currentIndex + 1} de {questions.length}
+          <div className="text-right flex-1 min-w-0">
+            <p
+              key={`counter-${questionNumber}`}
+              className="font-bold text-gray-700 text-sm md:text-base whitespace-nowrap"
+              aria-live="polite"
+            >
+              Pergunta {questionNumber} de {totalQuestions}
             </p>
-            <div className="w-36 sm:w-48 md:w-64 h-3 bg-gray-300 border-2 border-black mt-2 ml-auto">
+            <div className="w-full md:w-64 h-3 bg-gray-300 border-2 border-black mt-2 ml-auto overflow-hidden">
               <div
-                className="h-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
+                key={`progress-${questionNumber}`}
+                className="h-full bg-blue-600"
+                style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
@@ -197,8 +212,11 @@ export default function Home() {
         {/* Question Card */}
         <div className="bg-white border-4 border-black shadow-xl p-4 md:p-5 mb-3">
           <div className="mb-2">
-            <span className="inline-block bg-blue-600 text-white font-black px-3 md:px-4 py-1.5 md:py-2 border-2 border-black mb-3 md:mb-4 text-sm md:text-base">
-              PERGUNTA {currentIndex + 1}
+            <span
+              key={`badge-${questionNumber}`}
+              className="inline-block bg-blue-600 text-white font-black px-3 md:px-4 py-1.5 md:py-2 border-2 border-black mb-3 md:mb-4 text-sm md:text-base"
+            >
+              PERGUNTA {questionNumber}
             </span>
           </div>
           <h2 className="text-xl md:text-2xl font-black text-black mb-3 leading-tight">
@@ -208,6 +226,7 @@ export default function Home() {
           {!revealed ? (
             <div className="flex gap-4 mt-2">
               <Button
+                type="button"
                 onClick={handleReveal}
                 className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-black py-3 px-6 text-base md:text-lg border-3 border-black shadow-lg transform hover:scale-105 transition-transform"
               >
@@ -242,6 +261,7 @@ export default function Home() {
 
               {/* Next Button */}
               <Button
+                type="button"
                 onClick={handleNext}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"
               >
@@ -252,8 +272,9 @@ export default function Home() {
               {/* Back Button */}
               {currentIndex > 0 && (
                 <Button
+                  type="button"
                   onClick={() => {
-                    setCurrentIndex(currentIndex - 1);
+                    setCurrentIndex((i) => Math.max(0, i - 1));
                     setRevealed(false);
                   }}
                   className="w-full bg-gray-600 hover:bg-gray-700 text-white font-black py-2 px-4 text-sm border-3 border-black shadow-lg flex items-center justify-center gap-2"
