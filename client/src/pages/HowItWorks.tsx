@@ -13,7 +13,7 @@ export default function HowItWorks() {
           <img
             src="/manus-storage/unifran-logo_10c6e59e.png"
             alt="UNIFRAN Logo"
-            className="h-10 md:h-12 object-contain mb-2"
+            className="h-10 md:h-12 object-contain mb-2 mx-auto md:mx-0"
           />
           <div className="bg-yellow-400 border-4 border-black p-2.5 md:p-3 shadow-lg inline-block max-w-full">
             <h1 className="text-xl md:text-2xl font-black text-black uppercase leading-snug">
