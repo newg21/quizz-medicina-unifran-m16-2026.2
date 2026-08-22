@@ -50,7 +50,8 @@ export default function Cover() {
           </p>
           <p className="font-semibold text-gray-600 text-xs md:text-sm mt-2 px-2">
             Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
-            Clara Prado, Vitor Krempel, Rosa Silva
+            Clara Prado, Vitor Krempel, Rosa Silva<br />
+            Professora Laís Facioli
           </p>
         </div>
       </div>

@@ -43,11 +43,13 @@ export default function Final() {
             <p className="text-xs md:text-sm font-semibold text-gray-700 px-1">
               <span className="md:hidden">
                 Felipe Gomes, Mara Firmino, Emiliana Rezende,<br />
-                Juliana Volpe, Clara Prado, Vitor Krempel, Rosa Silva
+                Juliana Volpe, Clara Prado, Vitor Krempel, Rosa Silva<br />
+                Professora Laís Facioli
               </span>
               <span className="hidden md:inline">
                 Felipe Gomes, Mara Firmino, Emiliana Rezende, Juliana Volpe,<br />
-                Clara Prado, Vitor Krempel, Rosa Silva
+                Clara Prado, Vitor Krempel, Rosa Silva<br />
+                Professora Laís Facioli
               </span>
             </p>
           </div>
